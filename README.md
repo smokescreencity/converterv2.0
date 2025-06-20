@@ -3,11 +3,11 @@
 一、需求分析/n
 ---
 实验选题为《制式转换》。该程序作为一个转换程序，是一个非常实用的小工具，可以为生产生活提供便利，展现信息技术对生活的改善与提升，该程序设计了汉化界面并将相关功能封装到类中，以便于使用和维护。程序主要包含以下功能。<br>
-1.设计进制转换：<br>
+* 1.设计进制转换：<br>
 从十进制到二进制，从十进制到八进制，从十进制到十六进制，从二进制到十进制，从八进制到十进制，从十六进制到十进制的转换程序。<br>
-2.设计时间转换：<br>
+* 2.设计时间转换：<br>
 如北京时间对于世界其他主要城市之间的时间转换。<br>
-3.制式转换：<br>
+* 3.制式转换：<br>
 设计从米制到标准制和标准制到米制之间的转换。<br>
 ***
 
@@ -17,14 +17,13 @@
 
 （一）类定义：<br>
 -
-1.BaseConverter：<br>
-
+* 1.BaseConverter：<br>
 这个类提供了将十进制数转换为任意进制（2到16进制）的功能。主要实现方法是decimalToBase，通过不断将十进制数除以目标进制并取余数来完成转换。<br>
-2.DecimalConverter：<br>
+* 2.DecimalConverter：<br>
 这个类实现了将任意进制（2到16进制）的数转换为十进制的功能。主要实现方法是baseToDecimal，通过按位读取输入字符串并计算其对应的十进制值。<br>
-3.MetricConverter：<br>
+* 3.MetricConverter：<br>
 这个类提供了长度、重量、体积等常用单位之间的转换方法。包括米转英尺、公里转英里、公斤转磅和升转加仑。<br>
-4.TimeZoneConverter：<br>
+* 4.TimeZoneConverter：<br>
 这个类用于不同时区之间的时间转换。主要包含两个方法：getOffset用于获取指定时区相对于UTC的时区偏移量；convert用于根据时区偏移量转换时间。<br>
 
 （二）主程序：<br>
@@ -34,23 +33,23 @@
 用户可以选择进行十进制到其他进制的转换、其他进制到十进制的转换、度量衡转换以及时区转换。<br>
 对于每种转换操作，程序会提示用户输入相应的数据，并调用相应的类和方法进行计算和输出。<br>
 在每个转换操作结束后，程序会等待用户按回车键继续，直到用户选择退出（输入0）。<br>
-异常处理：<br>
+`异常处理：`<br>
 对于无效的转换类型、时区名称和时间输入，程序会给出相应的错误提示，并跳出当前的转换操作，返回主菜单继续等待用户输入。<br>
 ***
 三、具体实现
 ---
 （一）首先包含了一些必要的头文件：<br>
 -
-iostream：用于输入输出操作。<br>
-string：用于处理字符串。<br>
-iomanip：用于格式化输出，例如设置小数位数。<br>
-windows.h：用于设置控制台支持中文显示。<br>
-using namespace std;表示使用标准命名空间，简化了代码中标准库函数和对象的调用。<br>
+`iostream：`用于输入输出操作。<br>
+`string：`用于处理字符串。<br>
+`iomanip：`用于格式化输出，例如设置小数位数。<br>
+`windows.h：`用于设置控制台支持中文显示。<br>
+`using namespace std;`表示使用标准命名空间，简化了代码中标准库函数和对象的调用。<br>
 
 （二）类 BaseConverter<br>
 -
 作用：这一类提供将十进制数转换为任意进制（2到16进制）的功能。<br>
-函数 decimalToBase(int decimal, int base)：<br>
+函数 `decimalToBase(int decimal, int base)：`<br>
 该函数接受一个十进制整数 decimal 和一个目标进制 base。<br>
 如果输入的 decimal 为0，直接返回字符串"0"。<br>
 使用一个布尔变量 isNegative 来判断输入的数字是否为负数，如果是负数，先将其转换为绝对值进行处理。<br>
@@ -61,7 +60,7 @@ using namespace std;表示使用标准命名空间，简化了代码中标准库
 （三）类 DecimalConverter<br>
 -
 作用：这一类提供将其他进制的数（2到16进制）转换为十进制的功能。<br>
-函数 baseToDecimal(string number, int base)：<br>
+函数` baseToDecimal(string number, int base)：`<br>
 该函数接受一个字符串形式的进制数 number 和该数的进制 base。<br>
 初始化一个整数 result 为0，用于保存最终的十进制结果。<br>
 判断输入的字符串 number 是否以负号开始，若以负号开始，设置 isNegative 为 true，并去掉负号。<br>
@@ -72,21 +71,21 @@ using namespace std;表示使用标准命名空间，简化了代码中标准库
 -
 作用：这一类提供长度、重量、体积等常用单位之间的转换功能。<br>
 函数：<br>
-meterToFeet(double meter)：将米转换为英尺，转换系数为3.28084。<br>
-feetToMeter(double feet)：将英尺转换为米。<br>
-kilometerToMile(double km)：将公里转换为英里，转换系数为0.621371。<br>
-mileToKilometer(double mile)：将英里转换为公里。<br>
-kilogramToPound(double kg)：将公斤转换为磅，转换系数为2.20462。<br>
-poundToKilogram(double pound)：将磅转换为公斤。<br>
-literToGallon(double liter)：将升转换为加仑，转换系数为0.264172。<br>
-gallonToLiter(double gallon)：将加仑转换为升。<br>
+`meterToFeet(double meter)：`将米转换为英尺，转换系数为3.28084。<br>
+`feetToMeter(double feet)：`将英尺转换为米。<br>
+`kilometerToMile(double km)：`将公里转换为英里，转换系数为0.621371。<br>
+`mileToKilometer(double mile)：`将英里转换为公里。<br>
+`kilogramToPound(double kg)：`将公斤转换为磅，转换系数为2.20462。<br>
+`poundToKilogram(double pound)：`将磅转换为公斤。<br>
+`literToGallon(double liter)：`将升转换为加仑，转换系数为0.264172。<br>
+`gallonToLiter(double gallon)：`将加仑转换为升。<br>
 
 （五）类 TimeZoneConverter<br>
 -
 作用：这一类提供不同时区之间的时间转换功能。<br>
-函数 getOffset(string zone)：<br>
+函数` getOffset(string zone)：`<br>
 该函数根据给定的时区名称 zone（中文），返回该时区相对于UTC的偏移量（小时）。如果输入的时区名称不在预设的支持列表中，返回-100以表示无效时区。<br>
-函数 convert(int hours, int minutes, int fromOffset, int toOffset)：<br>
+函数 `convert(int hours, int minutes, int fromOffset, int toOffset)：`<br>
 该函数接受两个时间（源时间和目标时间）以及它们所在的时区相对于UTC的偏移量 fromOffset 和 toOffset。<br>
 将源时间先转换为总的分钟数 totalMinutes。<br>
 调整时区差，得到目标时间的总分钟数。<br>
